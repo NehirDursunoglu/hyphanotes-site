@@ -20,7 +20,7 @@
 <div class="wrap">
 <header class="top">
   <a class="lockup" href="/"><svg viewBox="308 172 408 680" aria-hidden="true"><path class="mark" d="M372 236 L372 788" stroke-width="128" stroke-linecap="round"/><path class="mark" d="M372 560 C372 430,652 410,652 560 L652 610" stroke-width="128" stroke-linecap="round"/><circle class="dot" cx="652" cy="788" r="64"/></svg>hypha</a>
-  <nav class="nav"><a href="/#features">Features</a><a href="/privacy">Privacy</a><a href="mailto:hello@hyphanotes.com">Contact</a></nav>
+  <nav class="nav"><a href="/#features">Features</a><a href="/privacy">Privacy</a><a href="/#contact">Contact</a></nav>
 </header>
 <main>
 <section class="hero">
@@ -61,6 +61,32 @@
   <div class="feature"><div class="ico">◷</div><h2>Your day, your week</h2><p>A short read on what you kept coming back to, the themes, and the notes worth rereading. A timeline of every week.</p></div>
   <div class="feature"><div class="ico">◎</div><h2>A map of your mind</h2><p>Your topics as a living network. Zoom into one to see how its notes link — and where they reach into others.</p></div>
 </section>
+
+<section class="contact" id="contact">
+  <h2>Say hello</h2>
+  <p>Questions, ideas, or want to try Hypha early? Write to us — a real person reads every message.</p>
+  <div class="mail">
+    <span class="addr" id="addr">hello@hyphanotes.com</span>
+    <button class="pill ghost" type="button" id="copy">Copy</button>
+    <a class="pill primary" href="mailto:hello@hyphanotes.com">Send an email</a>
+  </div>
+  <p class="soon" id="copied" aria-live="polite"></p>
+</section>
+<script>
+  document.getElementById('copy').addEventListener('click', async () => {
+    const out = document.getElementById('copied');
+    try {
+      await navigator.clipboard.writeText('hello@hyphanotes.com');
+      out.textContent = 'Copied — paste it into your email.';
+    } catch (e) {
+      // Older browsers: select the address so it can be copied by hand.
+      const r = document.createRange();
+      r.selectNodeContents(document.getElementById('addr'));
+      const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      out.textContent = 'Selected — press Ctrl+C (or ⌘C) to copy.';
+    }
+  });
+</script>
 </main>
 <footer>
   <span>© 2026 Hypha</span>
