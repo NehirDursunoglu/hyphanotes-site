@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy · Hypha</title>
+<meta name="description" content="How Hypha handles your notes, photos and account.">
+<meta name="theme-color" content="#7FD1A8">
+<link rel="icon" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:title" content="Privacy · Hypha">
+<meta property="og:description" content="How Hypha handles your notes, photos and account.">
+<meta property="og:image" content="https://hyphanotes.com/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <a class="lockup" href="/"><svg viewBox="308 172 408 680" aria-hidden="true"><path class="mark" d="M372 236 L372 788" stroke-width="128" stroke-linecap="round"/><path class="mark" d="M372 560 C372 430,652 410,652 560 L652 610" stroke-width="128" stroke-linecap="round"/><circle class="dot" cx="652" cy="788" r="64"/></svg>hypha</a>
+  <nav class="nav"><a href="/#features">Features</a><a href="/privacy">Privacy</a><a href="mailto:hello@hyphanotes.com">Contact</a></nav>
+</header>
+<main class="doc">
+<h1>Privacy</h1>
+<p class="updated">Last updated November 3, 2026</p>
+
+<div class="summary">
+<strong>In short</strong>
+<ul>
+<li>Your notes are yours. We don’t sell them, show ads, or use trackers.</li>
+<li>Notes are stored on your device and in your Hypha account, so your devices stay in sync.</li>
+<li>To find connections, the text of your notes is processed by OpenAI. You can turn this off.</li>
+<li>Delete a note and it leaves our servers. Delete your account and everything goes.</li>
+</ul>
+</div>
+
+<h2>Who we are</h2>
+<p>Hypha is a note-taking app made by an independent developer in Ankara, Türkiye. For anything about your data, write to <a href="mailto:hello@hyphanotes.com">hello@hyphanotes.com</a>.</p>
+
+<h2>What we collect</h2>
+<ul>
+<li><strong>Your account:</strong> your email address, a password if you set one (stored only as a secure hash), and a name if you add one. If you sign in with Google, we receive your name and email address from Google.</li>
+<li><strong>Your notes:</strong> what you write, the photos you attach, and what Hypha adds to them — topics, links between notes and their reasons, urgent flags and dates.</li>
+<li><strong>A “fingerprint” of each note:</strong> a list of numbers describing its meaning (an embedding), used only to find related notes and to search by meaning.</li>
+</ul>
+<p>We don’t collect your contacts, location, or advertising identifiers, and the app contains no analytics or advertising tools.</p>
+
+<h2>How it’s used</h2>
+<p>Only to run Hypha for you: keeping your notes in sync across your devices, finding connections, naming topics, writing your daily idea and your day and week summaries, and reading photos and voice notes into text.</p>
+
+<h2>Who processes it</h2>
+<ul>
+<li><strong>Supabase</strong> hosts your account, notes, photos and embeddings, so every device you sign in on gets the same notes. Only you can read your account’s data.</li>
+<li><strong>OpenAI</strong> processes note text when “Find connections” is on, and the photos and voice recordings you ask Hypha to read. It returns the result and, under OpenAI’s API terms, does not use this data to train its models. OpenAI may keep it for a limited time (normally up to 30 days) to detect abuse, then deletes it.</li>
+<li><strong>Google</strong> confirms your identity if you choose “Continue with Google”.</li>
+</ul>
+<p>These providers may process data outside Türkiye, including in the United States and the European Union.</p>
+
+<h2>Photos and voice notes</h2>
+<p>A photo you attach is stored in your account’s private storage so your other devices can show it. A voice recording is sent to be turned into text and is then deleted; only the text is kept as your note.</p>
+
+<h2>Notifications</h2>
+<p>Daily ideas and urgent reminders are scheduled on your device. You can turn them off or change their time in Profile.</p>
+
+<h2>Turning off AI</h2>
+<p>In Profile, turn off “Find connections”. Your notes then stay on your device and in your account, and nothing is sent to OpenAI.</p>
+
+<h2>Deleting</h2>
+<ul>
+<li><strong>A note:</strong> its text, photo and links are removed from our servers and your other devices right away. On the device you deleted it from, it waits in Trash for 30 days so you can restore it.</li>
+<li><strong>Your account:</strong> in Hypha, go to Profile → Delete account. Your account, notes, photos and links are permanently removed from our servers. See <a href="/delete">how to delete your account</a>.</li>
+</ul>
+
+<h2>Backups</h2>
+<p>A backup is a file you save where you choose. Hypha doesn’t keep a copy.</p>
+
+<h2>Children</h2>
+<p>Hypha is not intended for children under 13, and we don’t knowingly collect their data.</p>
+
+<h2>Your rights</h2>
+<p>You can see, correct, export (Profile → Back up) and delete your data at any time in the app. For any other request, including those under KVKK or GDPR, write to <a href="mailto:hello@hyphanotes.com">hello@hyphanotes.com</a> and we’ll reply within 30 days.</p>
+
+<h2>Changes</h2>
+<p>If this policy changes in a way that matters, we’ll tell you in the app before it takes effect.</p>
+</main>
+<footer>
+  <span>© 2026 Hypha</span>
+  <span><a href="/privacy">Privacy</a><a href="/delete">Delete your account</a><a href="mailto:hello@hyphanotes.com">hello@hyphanotes.com</a></span>
+</footer>
+</div>
+</body>
+</html>
