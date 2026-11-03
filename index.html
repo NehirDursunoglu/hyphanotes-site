@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/style.css?v=3">
 </head>
 <body>
 <div class="wrap">
@@ -63,29 +63,36 @@
 </section>
 
 <section class="contact" id="contact">
+  <div class="contact-mark" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M4 6.5h16v11H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4.5 7l7.5 6 7.5-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
   <h2>Say hello</h2>
-  <p>Questions, ideas, or want to try Hypha early? Write to us — a real person reads every message.</p>
+  <p>Questions, ideas, or want to try Hypha before everyone else? A real person reads every message.</p>
   <div class="mail">
-    <span class="addr" id="addr">hello@hyphanotes.com</span>
-    <button class="pill ghost" type="button" id="copy">Copy</button>
+    <button class="addr" type="button" id="copy" title="Copy address">
+      <span id="addr">hello@hyphanotes.com</span>
+      <span class="copy-label" id="copyLabel">Copy</span>
+    </button>
     <a class="pill primary" href="mailto:hello@hyphanotes.com">Send an email</a>
   </div>
-  <p class="soon" id="copied" aria-live="polite"></p>
 </section>
 <script>
-  document.getElementById('copy').addEventListener('click', async () => {
-    const out = document.getElementById('copied');
-    try {
-      await navigator.clipboard.writeText('hello@hyphanotes.com');
-      out.textContent = 'Copied — paste it into your email.';
-    } catch (e) {
-      // Older browsers: select the address so it can be copied by hand.
-      const r = document.createRange();
-      r.selectNodeContents(document.getElementById('addr'));
-      const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
-      out.textContent = 'Selected — press Ctrl+C (or ⌘C) to copy.';
-    }
-  });
+  (function () {
+    const btn = document.getElementById('copy'), label = document.getElementById('copyLabel');
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('hello@hyphanotes.com');
+        label.textContent = 'Copied ✓';
+      } catch (e) {
+        const r = document.createRange();
+        r.selectNodeContents(document.getElementById('addr'));
+        const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        label.textContent = 'Press Ctrl+C';
+      }
+      btn.classList.add('done');
+      setTimeout(() => { label.textContent = 'Copy'; btn.classList.remove('done'); }, 2200);
+    });
+  })();
 </script>
 </main>
 <footer>
