@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Privacy · Hypha</title>
 <meta name="description" content="How Hypha handles your notes, photos and account.">
 <meta name="theme-color" content="#7FD1A8">
@@ -13,18 +13,18 @@
 <meta property="og:image" content="https://hyphanotes.com/icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css?v=4">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css?v=5">
 </head>
 <body>
 <div class="wrap">
 <header class="top">
   <a class="lockup" href="/"><svg viewBox="308 172 408 680" aria-hidden="true"><path class="mark" d="M372 236 L372 788" stroke-width="128" stroke-linecap="round"/><path class="mark" d="M372 560 C372 430,652 410,652 560 L652 610" stroke-width="128" stroke-linecap="round"/><circle class="dot" cx="652" cy="788" r="64"/></svg>hypha</a>
-  <nav class="nav"><a href="/#features">Features</a><a href="/privacy">Privacy</a><a href="/#contact">Contact</a></nav>
+  <nav class="nav"><a href="/#how">How it works</a><a class="opt" href="/#reasons">Connections</a><a href="/privacy">Privacy</a><a href="/#contact">Contact</a></nav>
 </header>
 <main class="doc">
 <h1>Privacy</h1>
-<p class="updated">Last updated November 3, 2026</p>
+<p class="updated">Last updated November 7, 2026</p>
 
 <div class="summary">
 <strong>In short</strong>
@@ -41,7 +41,7 @@
 
 <h2>What we collect</h2>
 <ul>
-<li><strong>Your account:</strong> your email address, a password if you set one (stored only as a secure hash), and a name if you add one. If you sign in with Google, we receive your name and email address from Google.</li>
+<li><strong>Your account:</strong> your email address, a password if you set one (stored only as a secure hash), and a name and profile photo if you add them. If you sign in with Google, we receive your name and email address from Google. If you sign in with Apple, we receive your email address (or a private relay address, if you choose to hide yours) and, the first time only, your name if you share it.</li>
 <li><strong>Your notes:</strong> what you write, the photos you attach, and what Hypha adds to them — topics, links between notes and their reasons, urgent flags and dates.</li>
 <li><strong>A “fingerprint” of each note:</strong> a list of numbers describing its meaning (an embedding), used only to find related notes and to search by meaning.</li>
 </ul>
@@ -54,7 +54,7 @@
 <ul>
 <li><strong>Supabase</strong> hosts your account, notes, photos and embeddings, so every device you sign in on gets the same notes. Only you can read your account’s data.</li>
 <li><strong>OpenAI</strong> processes note text when “Find connections” is on, and the photos and voice recordings you ask Hypha to read. It returns the result and, under OpenAI’s API terms, does not use this data to train its models. OpenAI may keep it for a limited time (normally up to 30 days) to detect abuse, then deletes it.</li>
-<li><strong>Google</strong> confirms your identity if you choose “Continue with Google”.</li>
+<li><strong>Google</strong> and <strong>Apple</strong> confirm your identity if you choose “Continue with Google” or “Continue with Apple”.</li>
 </ul>
 <p>These providers may process data outside Türkiye, including in the United States and the European Union.</p>
 

@@ -2,107 +2,361 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hypha — notes that find each other</title>
-<meta name="description" content="Plant a thought in a second. Hypha connects it to what you wrote before and brings old ideas back when they matter.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hypha · Notes that connect</title>
+<meta name="description" content="Hypha is a notes app that connects what you write today to what you wrote before, and tells you why each connection matters.">
 <meta name="theme-color" content="#7FD1A8">
 <link rel="icon" href="/favicon.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta property="og:title" content="Hypha — notes that find each other">
-<meta property="og:description" content="Plant a thought in a second. Hypha connects it to what you wrote before and brings old ideas back when they matter.">
+<meta property="og:title" content="Hypha · Notes that connect">
+<meta property="og:description" content="Your past notes already hold the answer. Hypha finds them, and tells you why they matter now.">
 <meta property="og:image" content="https://hyphanotes.com/icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css?v=4">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css?v=5">
 </head>
 <body>
 <div class="wrap">
 <header class="top">
-  <a class="lockup" href="/"><svg viewBox="308 172 408 680" aria-hidden="true"><path class="mark" d="M372 236 L372 788" stroke-width="128" stroke-linecap="round"/><path class="mark" d="M372 560 C372 430,652 410,652 560 L652 610" stroke-width="128" stroke-linecap="round"/><circle class="dot" cx="652" cy="788" r="64"/></svg>hypha</a>
-  <nav class="nav"><a href="/#features">Features</a><a href="/privacy">Privacy</a><a href="/#contact">Contact</a></nav>
+  <a class="lockup" href="/" aria-label="Hypha home"><svg viewBox="308 172 408 680" aria-hidden="true"><path class="mark" d="M372 236 L372 788" stroke-width="128" stroke-linecap="round"/><path class="mark" d="M372 560 C372 430,652 410,652 560 L652 610" stroke-width="128" stroke-linecap="round"/><circle class="dot" cx="652" cy="788" r="64"/></svg>hypha</a>
+  <nav class="nav"><a href="#how">How it works</a><a class="opt" href="#reasons">Connections</a><a href="/privacy">Privacy</a><a href="#contact">Contact</a></nav>
 </header>
+
 <main>
 <section class="hero">
+  <canvas class="field-bg" id="field" aria-hidden="true"></canvas>
   <div>
-    <div class="eyebrow">Notes that find each other</div>
-    <h1>Catch it before it slips.</h1>
-    <p class="lede">Open Hypha and you’re already writing. Plant a thought in a second — Hypha quietly connects it to what you wrote before, shows you why, and brings old ideas back when they matter again.</p>
-    <div class="stores">
-      <span class="pill primary">Coming soon to iPhone</span>
-      <span class="pill ghost">Coming soon to Android</span>
+    <div class="label">A notes app that remembers for you</div>
+    <h1>Your past notes already hold <em>the answer.</em></h1>
+    <p class="lede">Write a thought in seconds. Hypha reads it against everything you have written before, brings back the notes that genuinely help, and tells you in one line why each one matters now.</p>
+    <div class="actions">
+      <a class="btn primary" href="mailto:hello@hyphanotes.com?subject=Hypha%20early%20access">Request early access</a>
+      <a class="btn ghost" href="#how">See how it works</a>
     </div>
-    <p class="soon">Want to try it early? Write to <a href="mailto:hello@hyphanotes.com">hello@hyphanotes.com</a>.</p>
+    <p class="soon">Coming soon to iPhone and Android.</p>
   </div>
-  <div class="phone" aria-hidden="true">
-    <div class="screen">
-      <div class="meta">Nov 2 · 21:40 <span class="tag">Game Design</span></div>
-      <h3>Players keep quitting my game at level 3.</h3>
-      <div class="card together">
-        <div class="eb">✦ TOGETHER</div>
-        <p>People leave when the next win feels too far away. Your note on daily streaks already has the fix: one small goal at a time.</p>
-        <p style="color:#4b5752"><span style="color:#1f7a55">→</span> Add a tiny daily challenge before level 3 and see who stays.</p>
-      </div>
-      <div class="label">CONNECTED TO</div>
-      <div class="card">
-        <p style="margin:0;font-weight:500">Streaks work because each day asks for just one small thing.</p>
-        <div class="why"><b>Solution ·</b> a small daily goal keeps people past the hard part · Oct 14</div>
-      </div>
-      <div class="card">
-        <p style="margin:0;font-weight:500">Flow: raise the challenge slowly, never in one jump.</p>
-        <div class="why"><b>Same problem ·</b> level 3 may simply be too big a step · Sep 30</div>
-      </div>
-      <div class="bar"><span>Written Nov 2</span><span>Edit</span></div>
+
+  <div class="demo">
+    <div class="net" id="net" role="img" aria-label="An example: a new note links to two older notes, each with a one-line reason.">
+      <svg class="threads" id="threads" aria-hidden="true"></svg>
+    </div>
+    <div class="who" role="group" aria-label="Example notes">
+      <span>EXAMPLE</span>
+      <button type="button" data-s="0" aria-pressed="true">Developer</button>
+      <button type="button" data-s="1" aria-pressed="false">Creator</button>
+      <button type="button" data-s="2" aria-pressed="false">Artist</button>
     </div>
   </div>
 </section>
 
-<section class="features" id="features">
-  <div class="feature"><div class="ico">✎</div><h2>Opens straight into writing</h2><p>No folders, no titles, no setup. Type, speak or snap a photo and tap Plant. Share from any app to save a link or a line.</p></div>
-  <div class="feature"><div class="ico">⌁</div><h2>Connections, with proof</h2><p>Every link quotes both notes and says what the old one adds — a solution, an example, the same problem, a contradiction.</p></div>
-  <div class="feature"><div class="ico">✦</div><h2>What they say together</h2><p>When a few notes meet, Hypha writes the idea none of them says alone — and one small next step.</p></div>
-  <div class="feature"><div class="ico">↺</div><h2>Forgotten notes come back</h2><p>One gentle notification a day brings back an old note that matters again, or what you wrote a month ago today.</p></div>
-  <div class="feature"><div class="ico">◷</div><h2>Your day, your week</h2><p>A short read on what you kept coming back to, the themes, and the notes worth rereading. A timeline of every week.</p></div>
-  <div class="feature"><div class="ico">◎</div><h2>A map of your mind</h2><p>Your topics as a living network. Zoom into one to see how its notes link — and where they reach into others.</p></div>
+<section class="block" id="how">
+  <div class="head">
+    <div>
+      <div class="label">How it works</div>
+      <h2>Capture now. Connect later. Understand why.</h2>
+    </div>
+    <p>Most notes are written once and never read again. Hypha keeps them working: every new thought is a chance for an old one to become useful.</p>
+  </div>
+  <ol class="steps3">
+    <li><div class="num">01</div><h3>Capture</h3><p>Type, speak, or photograph a page. There are no folders to choose and nothing to set up first. The app opens straight into writing.</p></li>
+    <li><div class="num">02</div><h3>Connect</h3><p>Hypha reads the new note against your whole history and shortlists the few notes that genuinely help, not the ones that merely share a word.</p></li>
+    <li><div class="num">03</div><h3>Understand</h3><p>Each connection states its reason in a single line, so you know in a glance whether it is a past solution, an example, or a problem returning.</p></li>
+  </ol>
+</section>
+
+<section class="block" id="reasons">
+  <div class="head">
+    <div>
+      <div class="label">Every link has a reason</div>
+      <h2>Not just related. Related in a way you can use.</h2>
+    </div>
+    <p>Hypha names what an older note brings to the one you just wrote. Five kinds of connection cover almost everything worth bringing back.</p>
+  </div>
+  <div class="roles">
+    <article class="role">
+      <div class="label">Solution</div>
+      <h3>You have solved this before.</h3>
+      <p>An earlier note that answers the question you are asking now.</p>
+      <div class="pair"><div><small>Today</small>Feed endpoint is slow again since comments shipped.</div><div class="arrow">↳ connects to</div><div><small>Aug 2025</small>An index on (user_id, created_at) took the feed from 2.1 s to 40 ms.</div></div>
+    </article>
+    <article class="role">
+      <div class="label">Same problem</div>
+      <h3>It is back, in a new form.</h3>
+      <p>The issue you met before, showing up somewhere else.</p>
+      <div class="pair"><div><small>Today</small>Two videos have been waiting to be edited for a month.</div><div class="arrow">↳ connects to</div><div><small>Aug 2025</small>Weekly uploads for six months. Editing is where everything stalls.</div></div>
+    </article>
+    <article class="role">
+      <div class="label">Example</div>
+      <h3>A concrete case of the idea.</h3>
+      <p>Something you saw or did that shows the principle at work.</p>
+      <div class="pair"><div><small>Today</small>Price for a café mural, three metres wide.</div><div class="arrow">↳ connects to</div><div><small>Apr 2025</small>Per-piece pricing: $150 a bust, $300 full body. Clients prefer it.</div></div>
+    </article>
+    <article class="role">
+      <div class="label">Contradiction</div>
+      <h3>You used to think otherwise.</h3>
+      <p>An older belief that disagrees with what you wrote today.</p>
+      <div class="pair"><div><small>Today</small>Started at 7 this week and got more done before lunch than in a whole night.</div><div class="arrow">↳ connects to</div><div><small>Mar 2025</small>I focus best after 11 pm. Mornings are for light review.</div></div>
+    </article>
+    <article class="role">
+      <div class="label">Continues</div>
+      <h3>The next step of a thread.</h3>
+      <p>Work you started earlier that this note picks up again.</p>
+      <div class="pair"><div><small>Today</small>A pipeline that turns the week's commits into a devlog post.</div><div class="arrow">↳ connects to</div><div><small>Mar 2026</small>Generate a weekly changelog from merged pull requests.</div></div>
+    </article>
+  </div>
+</section>
+
+<section class="block" id="principles">
+  <div class="head">
+    <div>
+      <div class="label">Precision over volume</div>
+      <h2>Fewer links. Better links.</h2>
+    </div>
+    <p>A notes app that links everything to everything is noise. Hypha is deliberately strict about what it shows you.</p>
+  </div>
+  <div class="principles">
+    <div><h3>Meaning, not keywords</h3><p>Two notes that both mention coffee are not connected. A link appears only when the older note changes what you would do next.</p></div>
+    <div><h3>Checked twice</h3><p>Every proposed connection is reviewed a second time on its own before you see it. Weak or invented reasons are dropped.</p></div>
+    <div><h3>Across languages</h3><p>Write in Turkish, Spanish or English. A note in one language can bring back a note you wrote in another.</p></div>
+    <div><h3>You stay in charge</h3><p>If a connection is wrong, remove it with one tap. Hypha will not suggest those two notes together again.</p></div>
+  </div>
+</section>
+
+<section class="block" id="features">
+  <div class="head">
+    <div>
+      <div class="label">Also in Hypha</div>
+      <h2>Everything else, without the clutter.</h2>
+    </div>
+    <p>The rest of the app is designed to stay out of the way until you need it.</p>
+  </div>
+  <div class="more">
+    <div><h3>Voice notes</h3><p>Speak while you walk. The recording becomes text and connects like any other note.</p></div>
+    <div><h3>Photographed pages</h3><p>A whiteboard, a book page or handwritten notes are read into searchable text.</p></div>
+    <div><h3>Topics that sort themselves</h3><p>Notes gather under a few broad topics, named for you and kept tidy as you write.</p></div>
+    <div><h3>A map of your thinking</h3><p>See your topics as a network and how they reach into one another.</p></div>
+    <div><h3>Your day and your week</h3><p>A short summary of what you kept returning to, and the notes worth rereading.</p></div>
+    <div><h3>Together</h3><p>When several notes meet, Hypha writes the one insight they share, with a small next step.</p></div>
+    <div><h3>Search by meaning</h3><p>Find a note by what it was about, even when you cannot remember the words.</p></div>
+    <div><h3>Bring your notes</h3><p>Import from Notion, Evernote, Markdown or plain text, with their original dates.</p></div>
+    <div><h3>Every device</h3><p>Your notes and photos stay in sync across all your devices.</p></div>
+  </div>
+</section>
+
+<section class="block" id="privacy">
+  <div class="privacy-band">
+    <div>
+      <div class="label">Privacy</div>
+      <h2>Your notes stay yours.</h2>
+    </div>
+    <div>
+      <ul>
+        <li><strong>No ads and no trackers.</strong> The app contains no analytics or advertising tools, and your data is never sold.</li>
+        <li><strong>Not used to train AI.</strong> Notes are processed through the OpenAI API, whose terms exclude training on this data.</li>
+        <li><strong>AI is optional.</strong> Turn connections off and nothing is sent for processing.</li>
+        <li><strong>Leave whenever you like.</strong> Delete your account inside the app and everything is removed from our servers.</li>
+      </ul>
+      <p class="more-link"><a href="/privacy">Read the full privacy policy</a></p>
+    </div>
+  </div>
 </section>
 
 <section class="contact" id="contact">
-  <div class="contact-mark" aria-hidden="true">
-    <svg viewBox="0 0 24 24"><path d="M4 6.5h16v11H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4.5 7l7.5 6 7.5-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
+  <div class="label">Contact</div>
   <h2>Say hello</h2>
-  <p>Questions, ideas, or want to try Hypha before everyone else?<br>Tell us what you think.</p>
+  <p>Questions, ideas, or want to try Hypha before everyone else? Tell us what you think.</p>
   <div class="mail">
     <button class="addr" type="button" id="copy" title="Copy address">
       <span id="addr">hello@hyphanotes.com</span>
       <span class="copy-label" id="copyLabel">Copy</span>
     </button>
-    <a class="pill primary" href="mailto:hello@hyphanotes.com">Send an email</a>
+    <a class="btn primary" href="mailto:hello@hyphanotes.com">Send an email</a>
   </div>
 </section>
-<script>
-  (function () {
-    const btn = document.getElementById('copy'), label = document.getElementById('copyLabel');
-    btn.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText('hello@hyphanotes.com');
-        label.textContent = 'Copied ✓';
-      } catch (e) {
-        const r = document.createRange();
-        r.selectNodeContents(document.getElementById('addr'));
-        const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
-        label.textContent = 'Press Ctrl+C';
-      }
-      btn.classList.add('done');
-      setTimeout(() => { label.textContent = 'Copy'; btn.classList.remove('done'); }, 2200);
-    });
-  })();
-</script>
 </main>
+
 <footer>
   <span>© 2026 Hypha</span>
   <span><a href="/privacy">Privacy</a><a href="/delete">Delete your account</a><a href="mailto:hello@hyphanotes.com">hello@hyphanotes.com</a></span>
 </footer>
 </div>
+
+<script>
+(function () {
+  // ---- Example notes: one new note, two older notes it connects to, two that it doesn't.
+  var S = [
+    { new: ["Today, 09:41", "Mobile app is hammering the API", "When auth came back after a 3-minute outage, every phone retried login at once. Second outage in ten minutes."],
+      a: ["Apr 14, 2025", "Postmortem: payments outage", "Every client retried at the same moment and took the API down for 40 minutes. Fix: exponential backoff with jitter.", "Solution", "You fixed this exact pattern in April: back off, with jitter."],
+      b: ["Jun 22, 2026", "Load test results", "At 1,200 requests per second the database connection pool runs out. Pool size, not CPU, is the ceiling.", "Example", "Shows where the next limit is when traffic spikes."],
+      d: [["Dec 1, 2025", "Rust finally clicked", "The borrow checker asks who owns this data right now."], ["Mar 19, 2026", "React hooks gotcha", "An object in useEffect deps reruns every render."]] },
+    { new: ["Today, 18:20", "Video idea: Big-O for non-programmers", "Most viewers leave tutorials in the first minute. How should this one open so they stay?"],
+      a: ["Apr 15, 2026", "Hook formula from Ali", "Show the finished result on screen in the first three seconds, then rewind and explain how you got there.", "Solution", "A tested opening for exactly this question."],
+      b: ["Mar 10, 2025", "Retention graph, Git video", "35% of viewers left at 0:40, right where I explained my setup instead of the promise.", "Same problem", "The first minute is where you lost them before."],
+      d: [["Jul 27, 2026", "Lighting setup", "Key light at 45°, window behind the camera."], ["Oct 30, 2025", "Shorts experiment", "1,200 new subscribers, few watch long videos."]] },
+    { new: ["Today, 22:05", "Series for the spring show", "The gallery wants eight connected pieces, something personal, a clear voice. I don't have a theme yet."],
+      a: ["Feb 22, 2026", "A theme I keep returning to", "Empty rooms right after people leave. Five sketches of it, none of them planned.", "Solution", "A theme you already return to without trying."],
+      b: ["Jun 25, 2025", "Curator feedback", "\"Technically strong, but it doesn't say anything yet.\"", "Continues", "This show is your chance to answer her."],
+      d: [["Mar 28, 2026", "Prints vs originals", "40 prints sold at the fair, one original."], ["Jan 15, 2026", "Rim light study", "A warm edge makes a figure pop off dark."]] }
+  ];
+
+  var net = document.getElementById('net'), svg = document.getElementById('threads');
+  var buttons = [].slice.call(document.querySelectorAll('.who button'));
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var NS = 'http://www.w3.org/2000/svg';
+  var cur = 0, run = 0, timers = [];
+
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function card(d, cls, why) {
+    var n = el('div', 'n ' + cls);
+    n.appendChild(el('div', 'when', d[0]));
+    n.appendChild(el('b', '', d[1]));
+    var p = el('p', '', d[2]); n.appendChild(p);
+    if (why) {
+      var w = el('div', 'why'), inner = el('div'), s = el('span');
+      var role = el('i', '', why[0]); s.appendChild(role); s.appendChild(document.createTextNode(why[1]));
+      inner.appendChild(s); w.appendChild(inner); n.appendChild(w);
+    }
+    return n;
+  }
+  function narrow() { return net.clientWidth < 520; }
+  // Where each card sits (percent of the field).
+  function place(n, slot) {
+    var wide = {
+      new: [3, 2, 55], a: [47, 28, 50], b: [3, 63, 50], d0: [63, 1, 35], d1: [57, 84, 41]
+    }, small = {
+      new: [2, 1, 80], a: [18, 31, 80], b: [2, 66, 80], d0: [0, 0, 0], d1: [0, 0, 0]
+    };
+    var p = (narrow() ? small : wide)[slot];
+    n.style.left = p[0] + '%'; n.style.top = p[1] + '%'; n.style.width = p[2] + '%';
+    if (narrow() && slot[0] === 'd') n.style.display = 'none';
+  }
+  function later(ms, f) { var id = run; timers.push(setTimeout(function () { if (id === run) f(); }, reduce ? 0 : ms)); }
+  function clear() { timers.forEach(clearTimeout); timers = []; run++; [].slice.call(net.querySelectorAll('.n')).forEach(function (n) { n.remove(); }); svg.innerHTML = ''; }
+
+  // A thread from card A to card B: leaves the facing edge, curves like a hypha.
+  function anchor(r, other) {
+    var cx = r.x + r.w / 2, cy = r.y + r.h / 2, ox = other.x + other.w / 2, oy = other.y + other.h / 2;
+    var dx = ox - cx, dy = oy - cy;
+    if (Math.abs(dx) / r.w > Math.abs(dy) / r.h) return { x: dx > 0 ? r.x + r.w : r.x, y: cy + Math.max(-r.h * .25, Math.min(r.h * .25, dy * .2)), nx: dx > 0 ? 1 : -1, ny: 0 };
+    return { x: cx + Math.max(-r.w * .3, Math.min(r.w * .3, dx * .25)), y: dy > 0 ? r.y + r.h : r.y, nx: 0, ny: dy > 0 ? 1 : -1 };
+  }
+  function rect(n) { var b = net.getBoundingClientRect(), r = n.getBoundingClientRect(); return { x: r.left - b.left, y: r.top - b.top, w: r.width, h: r.height }; }
+  function grow(from, to, done) {
+    var A = rect(from), B = rect(to), p = anchor(A, B), q = anchor(B, A);
+    // On a phone the cards stack; a thread to a card below the middle one
+    // runs down the left margin instead of behind it.
+    if (narrow() && B.y - (A.y + A.h) > 60) {
+      p = { x: A.x + 14, y: A.y + A.h, nx: 0, ny: 1 }; q = { x: B.x + 14, y: B.y, nx: 0, ny: -1 };
+    }
+    var dist = Math.hypot(q.x - p.x, q.y - p.y), k = dist * .42;
+    var d = 'M' + p.x + ' ' + p.y + ' C' + (p.x + p.nx * k + (q.x - p.x) * .1) + ' ' + (p.y + p.ny * k) + ' ' + (q.x + q.nx * k) + ' ' + (q.y + q.ny * k - (q.y - p.y) * .08) + ' ' + q.x + ' ' + q.y;
+    var g = document.createElementNS(NS, 'g');
+    var halo = document.createElementNS(NS, 'path'); halo.setAttribute('class', 't halo'); halo.setAttribute('d', d);
+    var path = document.createElementNS(NS, 'path'); path.setAttribute('class', 't'); path.setAttribute('d', d);
+    var tipG = document.createElementNS(NS, 'circle'); tipG.setAttribute('class', 'tip-glow'); tipG.setAttribute('r', 7);
+    var tip = document.createElementNS(NS, 'circle'); tip.setAttribute('class', 'tip'); tip.setAttribute('r', 2.6);
+    g.appendChild(halo); g.appendChild(path); g.appendChild(tipG); g.appendChild(tip); svg.appendChild(g);
+    var len = path.getTotalLength();
+    [halo, path].forEach(function (x) { x.style.strokeDasharray = len; x.style.strokeDashoffset = len; });
+    // Little side filaments, like hyphae branching as they grow.
+    var branches = [];
+    [.28, .52, .74].forEach(function (f, i) {
+      var pt = path.getPointAtLength(len * f), pt2 = path.getPointAtLength(len * f + 2);
+      var ang = Math.atan2(pt2.y - pt.y, pt2.x - pt.x) + (i % 2 ? 1 : -1) * (0.7 + Math.random() * .4);
+      var L = 10 + Math.random() * 12, mx = pt.x + Math.cos(ang) * L * .6, my = pt.y + Math.sin(ang) * L * .6;
+      var ex = pt.x + Math.cos(ang + .3) * L, ey = pt.y + Math.sin(ang + .3) * L;
+      var b = document.createElementNS(NS, 'path'); b.setAttribute('class', 'b');
+      b.setAttribute('d', 'M' + pt.x + ' ' + pt.y + ' Q' + mx + ' ' + my + ' ' + ex + ' ' + ey);
+      g.insertBefore(b, path); var bl = b.getTotalLength(); b.style.strokeDasharray = bl; b.style.strokeDashoffset = bl;
+      branches.push([b, bl, f]);
+    });
+    var dur = reduce ? 1 : 1500, t0 = null, id = run;
+    function step(ts) {
+      if (id !== run) return;
+      if (t0 === null) t0 = ts;
+      var t = Math.min(1, (ts - t0) / dur), e = 1 - Math.pow(1 - t, 3);
+      [halo, path].forEach(function (x) { x.style.strokeDashoffset = len * (1 - e); });
+      var pt = path.getPointAtLength(len * e);
+      tip.setAttribute('cx', pt.x); tip.setAttribute('cy', pt.y); tipG.setAttribute('cx', pt.x); tipG.setAttribute('cy', pt.y);
+      branches.forEach(function (b) { var u = Math.max(0, Math.min(1, (e - b[2]) / .25)); b[0].style.strokeDashoffset = b[1] * (1 - u); });
+      if (t < 1) requestAnimationFrame(step);
+      else { tip.setAttribute('r', 2); tipG.style.opacity = .5; done && done(); }
+    }
+    requestAnimationFrame(step);
+  }
+  function type(p, text, done) {
+    if (reduce) { p.textContent = text; return done(); }
+    var i = 0, caret = el('span', 'caret'); p.textContent = ''; p.appendChild(caret);
+    var id = run;
+    (function tick() {
+      if (id !== run) return;
+      i += 2; p.textContent = text.slice(0, i); p.appendChild(caret);
+      if (i < text.length) setTimeout(tick, 22); else { caret.remove(); done(); }
+    })();
+  }
+
+  function show(k) {
+    clear(); cur = k;
+    buttons.forEach(function (b, i) { b.setAttribute('aria-pressed', String(i === k)); });
+    var s = S[k];
+    var nNew = card(s.new, 'new hidden'), nA = card(s.a, 'dim', [s.a[3], s.a[4]]), nB = card(s.b, 'dim', [s.b[3], s.b[4]]);
+    var d0 = card(s.d[0], 'dim'), d1 = card(s.d[1], 'dim');
+    [[nNew, 'new'], [nA, 'a'], [nB, 'b'], [d0, 'd0'], [d1, 'd1']].forEach(function (x) { place(x[0], x[1]); net.appendChild(x[0]); });
+    var body = nNew.querySelector('p'), text = s.new[2];
+    body.textContent = '';
+    later(350, function () {
+      nNew.classList.remove('hidden');
+      type(body, text, function () {
+        later(450, function () { grow(nNew, nA, function () { nA.classList.add('lit'); }); });
+        later(2300, function () { grow(nNew, nB, function () { nB.classList.add('lit'); }); });
+        later(9200, function () { if (!paused) show((cur + 1) % S.length); });
+      });
+    });
+  }
+  var paused = false;
+  buttons.forEach(function (b, i) { b.addEventListener('click', function () { paused = true; show(i); }); });
+  // Redraw on resize (threads are measured from the cards).
+  var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { show(cur); drawField(); }, 200); });
+  // Only animate while the hero is on screen.
+  if ('IntersectionObserver' in window) {
+    var seen = false;
+    new IntersectionObserver(function (es) { if (es[0].isIntersecting && !seen) { seen = true; show(0); } }, { threshold: .2 }).observe(net);
+  } else show(0);
+
+  // ---- Background: faint hyphae, drawn once.
+  var cv = document.getElementById('field');
+  function drawField() {
+    var r = cv.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = r.width * dpr; cv.height = r.height * dpr;
+    var c = cv.getContext('2d'); c.scale(dpr, dpr); c.clearRect(0, 0, r.width, r.height);
+    var dark = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim().indexOf('#0') === 0;
+    c.strokeStyle = dark ? 'rgba(127,209,168,.075)' : 'rgba(31,122,85,.075)'; c.lineWidth = 1; c.lineCap = 'round';
+    var seed = 7; function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+    function hypha(x, y, a, life, depth) {
+      c.beginPath(); c.moveTo(x, y);
+      for (var i = 0; i < life; i++) {
+        a += (rnd() - .5) * .35; x += Math.cos(a) * 6; y += Math.sin(a) * 6; c.lineTo(x, y);
+        if (depth < 3 && rnd() < .035) { c.stroke(); hypha(x, y, a + (rnd() < .5 ? -1 : 1) * (.6 + rnd() * .5), life * .55, depth + 1); c.beginPath(); c.moveTo(x, y); }
+      }
+      c.stroke();
+    }
+    for (var i = 0; i < 16; i++) hypha(rnd() * r.width, rnd() * r.height, rnd() * Math.PI * 2, 40 + rnd() * 50, 0);
+  }
+  drawField();
+
+  // ---- Copy the email address.
+  var btn = document.getElementById('copy'), label = document.getElementById('copyLabel');
+  btn.addEventListener('click', function () {
+    function ok() { label.textContent = 'Copied'; btn.classList.add('done'); setTimeout(function () { label.textContent = 'Copy'; btn.classList.remove('done'); }, 2200); }
+    try {
+      navigator.clipboard.writeText('hello@hyphanotes.com').then(ok, function () {
+        var rg = document.createRange(); rg.selectNodeContents(document.getElementById('addr'));
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(rg); label.textContent = 'Press Ctrl+C';
+      });
+    } catch (e) {}
+  });
+})();
+</script>
 </body>
 </html>
